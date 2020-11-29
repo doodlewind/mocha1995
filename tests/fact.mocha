@@ -1,0 +1,11 @@
+function fact(n) {
+    if (n <= 0) return 0;
+    for (var f = 1, i = 2; i <= n; i++)
+	f *= i; 
+    return f;
+}
+
+function rfact(n) {
+    if (n <= 0) return 0;
+    return n * fact(n-1);
+}

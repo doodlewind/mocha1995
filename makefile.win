@@ -1,0 +1,42 @@
+#//------------------------------------------------------------------------
+#//
+#// Makefile to build the MOCHA tree
+#//
+#//------------------------------------------------------------------------
+
+#//------------------------------------------------------------------------
+#//
+#// Specify the depth of the current directory relative to the
+#// root of NS
+#//
+#//------------------------------------------------------------------------
+DEPTH=..
+
+#//
+#// Since this Makefile requires OS_RELEASE before the common makefiles
+#// have been included, make sure that it is defined here !!
+#//
+!ifndef OS_RELEASE
+OS_RELEASE=32
+!endif
+
+#//------------------------------------------------------------------------
+#//
+#// Specify any "command" targets. (ie. DIRS, INSTALL_FILES, ...)
+#// (these must come before the common makefiles are included)
+#// 
+#// DIRS          - There are subdirectories to process
+#//
+#//------------------------------------------------------------------------
+!if "$(OS_RELEASE)" == "32" && "$(BUILD_OPT)" != "1"
+DIRS=include src
+!else
+DIRS=include src
+!endif
+
+#//------------------------------------------------------------------------
+#//
+#// Include the common makefile rules
+#//
+#//------------------------------------------------------------------------
+include <$(DEPTH)\mocha\config\rules.mak>

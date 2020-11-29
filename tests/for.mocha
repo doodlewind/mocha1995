@@ -1,0 +1,22 @@
+function foo(brk, ret) {
+    var i = 2;
+    for (it[i += 3] in it) {
+	print(i, it[i]);
+	if (i == brk || i > 1000) break;
+	if (i == ret || i > 1000) return;
+    }
+    for (i = 1; i <= 100; i += i) {
+	print(i);
+    }
+}
+
+dis(foo);
+
+print(foo);
+
+print("expect to see '8 height' as the last line produced by the for-in loop");
+foo(8, 0);
+print("expect to see '11 width' as the last line produced by the function");
+foo(0, 11);
+print("expect to see '23 array' as the last name produced by the for-in loop");
+foo(0, 0);

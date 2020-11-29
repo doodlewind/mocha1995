@@ -1,0 +1,10 @@
+function testBreak(n) {
+    for (var i = 0; i < 20; i++)
+	if (i == n)
+	    break;
+    return i;
+}
+
+print("expect 1:", testBreak(1))
+print("expect 11:", testBreak(11))
+print("expect 19:", testBreak(19))

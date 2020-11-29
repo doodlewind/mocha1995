@@ -1,0 +1,63 @@
+#//------------------------------------------------------------------------
+#//
+#// Makefile to build the MOCHA tests
+#//
+#//------------------------------------------------------------------------
+
+
+#//------------------------------------------------------------------------
+#//
+#// Specify the depth of the current directory relative to the
+#// root of NS
+#//
+#//------------------------------------------------------------------------
+DEPTH= ..\..
+
+MAKE_OBJ_TYPE=EXE
+#//------------------------------------------------------------------------
+#//
+#// Define any Public Make Variables here: (ie. PDFFILE, MAPFILE, ...)
+#//
+#//------------------------------------------------------------------------
+EXENAME=mocha$(OS_RELEASE)
+PDBFILE=$(EXENAME).pdb
+
+
+#//------------------------------------------------------------------------
+#// 
+#// Define the files necessary to build the target (ie. OBJS)
+#//
+#//------------------------------------------------------------------------
+OBJS=.\$(OBJDIR)\mo_shell.obj
+
+#//------------------------------------------------------------------------
+#//
+#// Define any Public Targets here (ie. PROGRAM, LIBRARY, DLL, ...)
+#// (these must be defined before the common makefiles are included)
+#//
+#//------------------------------------------------------------------------
+PROGRAM=$(EXENAME).exe
+
+#//------------------------------------------------------------------------
+#//
+#// Define any local options for the make tools 
+#//     (ie. LCFLAGS, LLFLAGS, LLIBS, LINCS)
+#//
+#//------------------------------------------------------------------------
+include <$(DEPTH)/mocha/config/config.mak>
+LLIBS=$(LLIBS) $(LIBMOCHA) $(LIBNSPR)
+
+
+#//------------------------------------------------------------------------
+#//
+#// Include the common makefile rules
+#//
+#//------------------------------------------------------------------------
+include <$(DEPTH)/mocha/config/rules.mak>
+
+!ifndef BUILD_OPT
+export:: $(PROGRAM) 
+    $(MAKE_INSTALL) $(PROGRAM) $(DIST)\bin
+
+install:: export
+!endif 

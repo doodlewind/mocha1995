@@ -1,0 +1,14 @@
+function testWith(doCos) {
+    with (Math) {
+	print("sin(0) is " + sin(0))
+	print("sin(PI/2) is " + sin(PI/2))
+	if (!doCos) return false
+	print("cos(0) is " + cos(0))
+	print("cos(PI/2) is " + cos(PI/2))
+	return true
+    }
+}
+dis(testWith)
+print(testWith)
+testWith(0)
+testWith(1)

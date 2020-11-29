@@ -1,0 +1,87 @@
+/*
+** Mocha bytecode definitions.
+**
+** Brendan Eich, 6/17/95.
+**
+** NB: Bytecodes are listed in order of increasing operator precedence.
+**     Decompiling code depends on this fact.
+** Also, the val column must be dense, to index initialized arrays.
+*/
+
+/* legend: op       val   name         image        len use def pre format */
+
+/* Permanently-assigned bytecodes. */
+MOPDEF(MOP_NOP,     0,    "nop",        0,            1,  0,  0,  0,  MOF_BYTE)
+MOPDEF(MOP_PUSH,    1,    "push",       0,            1,  0,  1,  0,  MOF_BYTE)
+MOPDEF(MOP_POP,     2,    "pop",        0,            1,  1,  0,  0,  MOF_BYTE)
+MOPDEF(MOP_ENTER,   3,    "enter",      0,            1,  1,  1,  0,  MOF_BYTE)
+MOPDEF(MOP_LEAVE,   4,    "leave",      0,            1,  1,  0,  0,  MOF_BYTE)
+MOPDEF(MOP_RETURN,  5,    "return",     0,            1,  1,  0,  0,  MOF_BYTE)
+MOPDEF(MOP_GOTO,    6,    "goto",       0,            3,  0,  0,  0,  MOF_JUMP)
+MOPDEF(MOP_IFEQ,    7,    "ifeq",       0,            3,  1,  0,  0,  MOF_JUMP)
+MOPDEF(MOP_IFNE,    8,    "ifne",       0,            3,  1,  0,  0,  MOF_JUMP)
+MOPDEF(MOP_IN,      9,    "in",         0,            1,  2,  1,  0,  MOF_BYTE)
+MOPDEF(MOP_DUP,     10,   "dup",        0,            1,  1,  2,  0,  MOF_BYTE)
+MOPDEF(MOP_ASSIGN,  11,   "assign",     0,            1,  2,  1,  0,  MOF_BYTE)
+MOPDEF(MOP_BITOR,   12,   "bitor",      "|",          1,  2,  1,  2,  MOF_BYTE)
+MOPDEF(MOP_BITXOR,  13,   "bitxor",     "^",          1,  2,  1,  2,  MOF_BYTE)
+MOPDEF(MOP_BITAND,  14,   "bitand",     "&",          1,  2,  1,  2,  MOF_BYTE)
+MOPDEF(MOP_EQ,      15,   "eq",         "==",         1,  2,  1,  1,  MOF_BYTE)
+MOPDEF(MOP_NE,      16,   "ne",         "!=",         1,  2,  1,  1,  MOF_BYTE)
+MOPDEF(MOP_LT,      17,   "lt",         "<",          1,  2,  1,  1,  MOF_BYTE)
+MOPDEF(MOP_LE,      18,   "le",         "<=",         1,  2,  1,  1,  MOF_BYTE)
+MOPDEF(MOP_GT,      19,   "gt",         ">",          1,  2,  1,  1,  MOF_BYTE)
+MOPDEF(MOP_GE,      20,   "ge",         ">=",         1,  2,  1,  1,  MOF_BYTE)
+MOPDEF(MOP_LSH,     21,   "lsh",        "<<",         1,  2,  1,  2,  MOF_BYTE)
+MOPDEF(MOP_RSH,     22,   "rsh",        ">>",         1,  2,  1,  2,  MOF_BYTE)
+MOPDEF(MOP_URSH,    23,   "ursh",       ">>>",        1,  2,  1,  2,  MOF_BYTE)
+MOPDEF(MOP_ADD,     24,   "add",        "+",          1,  2,  1,  2,  MOF_BYTE)
+MOPDEF(MOP_SUB,     25,   "sub",        "-",          1,  2,  1,  2,  MOF_BYTE)
+MOPDEF(MOP_MUL,     26,   "mul",        "*",          1,  2,  1,  2,  MOF_BYTE)
+MOPDEF(MOP_DIV,     27,   "div",        "/",          1,  2,  1,  2,  MOF_BYTE)
+MOPDEF(MOP_MOD,     28,   "mod",        "%",          1,  2,  1,  2,  MOF_BYTE)
+MOPDEF(MOP_NOT,     29,   "not",        "!",          1,  1,  1,  1,  MOF_BYTE)
+MOPDEF(MOP_BITNOT,  30,   "bitnot",     "~",          1,  1,  1,  1,  MOF_BYTE)
+MOPDEF(MOP_NEG,     31,   "neg",        "-",          1,  1,  1,  1,  MOF_BYTE)
+MOPDEF(MOP_NEW,     32,   mocha_new,    mocha_new,    2, -1,  1,  0,  MOF_BYTE)
+MOPDEF(MOP_TYPEOF,  33,   mocha_typeof, mocha_typeof, 1,  1,  1,  0,  MOF_BYTE)
+MOPDEF(MOP_VOID,    34,   mocha_void,   mocha_void,   1,  1,  1,  0,  MOF_BYTE)
+MOPDEF(MOP_INC,     35,   "inc",        "++",         2,  1,  1,  0,  MOF_INCOP)
+MOPDEF(MOP_DEC,     36,   "dec",        "--",         2,  1,  1,  0,  MOF_INCOP)
+MOPDEF(MOP_MEMBER,  37,   "member",     ".",          1,  2,  1,  0,  MOF_BYTE)
+MOPDEF(MOP_LMEMBER, 38,   "lmember",    ".",          1,  2,  1,  0,  MOF_BYTE)
+MOPDEF(MOP_INDEX,   39,   "index",      0,            1,  2,  1,  0,  MOF_BYTE)
+MOPDEF(MOP_LINDEX,  40,   "lindex",     0,            1,  2,  1,  0,  MOF_BYTE)
+MOPDEF(MOP_CALL,    41,   "call",       0,            2, -1,  1,  0,  MOF_ARGC)
+MOPDEF(MOP_NAME,    42,   "name",       0,            3,  0,  1,  0,  MOF_CONST)
+MOPDEF(MOP_NUMBER,  43,   "number",     0,            3,  0,  1,  0,  MOF_CONST)
+MOPDEF(MOP_STRING,  44,   "string",     0,            3,  0,  1,  0,  MOF_CONST)
+MOPDEF(MOP_ZERO,    45,   "zero",       "0",          1,  0,  1,  1,  MOF_BYTE)
+MOPDEF(MOP_ONE,     46,   "one",        "1",          1,  0,  1,  1,  MOF_BYTE)
+MOPDEF(MOP_NULL,    47,   mocha_null,   mocha_null,   1,  0,  1,  1,  MOF_BYTE)
+MOPDEF(MOP_THIS,    48,   mocha_this,   mocha_this,   1,  0,  1,  1,  MOF_BYTE)
+MOPDEF(MOP_FALSE,   49,   mocha_false,  mocha_false,  1,  0,  1,  1,  MOF_BYTE)
+MOPDEF(MOP_TRUE,    50,   mocha_true,   mocha_true,   1,  0,  1,  1,  MOF_BYTE)
+
+/* Bytecodes reserved for future use. */
+MOPDEF(MOP_51,      51,   "mop51",      0,            0,  0,  0,  0,  0)
+MOPDEF(MOP_52,      52,   "mop52",      0,            0,  0,  0,  0,  0)
+MOPDEF(MOP_53,      53,   "mop53",      0,            0,  0,  0,  0,  0)
+MOPDEF(MOP_54,      54,   "mop54",      0,            0,  0,  0,  0,  0)
+MOPDEF(MOP_55,      55,   "mop55",      0,            0,  0,  0,  0,  0)
+MOPDEF(MOP_56,      56,   "mop56",      0,            0,  0,  0,  0,  0)
+MOPDEF(MOP_57,      57,   "mop57",      0,            0,  0,  0,  0,  0)
+MOPDEF(MOP_58,      58,   "mop58",      0,            0,  0,  0,  0,  0)
+MOPDEF(MOP_59,      59,   "mop59",      0,            0,  0,  0,  0,  0)
+MOPDEF(MOP_60,      60,   "mop60",      0,            0,  0,  0,  0,  0)
+MOPDEF(MOP_61,      61,   "mop61",      0,            0,  0,  0,  0,  0)
+MOPDEF(MOP_62,      62,   "mop62",      0,            0,  0,  0,  0,  0)
+MOPDEF(MOP_63,      63,   "mop63",      0,            0,  0,  0,  0,  0)
+
+/* Transient bytecodes written on the fly. */
+MOPDEF(MOP_TRAP,    64,   "trap",       0,            1,  0,  0,  0,  MOF_BYTE)
+
+#define MOCHA_HAS_DELETE_OPERATOR 1
+#ifdef MOCHA_HAS_DELETE_OPERATOR
+MOPDEF(MOP_DELETE,  65,   mocha_delete, mocha_delete, 1,  1,  1,  1,  MOF_BYTE)
+#endif

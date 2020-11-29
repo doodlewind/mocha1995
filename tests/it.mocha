@@ -1,0 +1,13 @@
+function printcolor() {
+    print(this.color)
+}
+
+//printcolor()
+
+it.color = "red"
+it.funny = printcolor
+//print(it.funny)
+it.funny()
+
+it.color = "blue"
+it.funny()

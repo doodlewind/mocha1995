@@ -1,0 +1,96 @@
+#//------------------------------------------------------------------------
+#//
+#// Makefile to build the NSPR DLL
+#//
+#//------------------------------------------------------------------------
+
+
+#//------------------------------------------------------------------------
+#//
+#// Specify the depth of the current directory relative to the
+#// root of NS
+#//
+#//------------------------------------------------------------------------
+DEPTH= ..\..
+
+!ifndef MAKE_OBJ_TYPE
+MAKE_OBJ_TYPE=EXE
+!endif
+
+#//------------------------------------------------------------------------
+#//
+#// Define any Public Make Variables here: (ie. PDFFILE, MAPFILE, ...)
+#//
+#//------------------------------------------------------------------------
+LIBNAME=mocha$(OS_RELEASE)
+PDBFILE=$(LIBNAME).pdb
+
+LINCS = -I$(DEPTH)/sun-java/md-include \
+	-I$(DEPTH)/sun-java/include \
+	-I$(DEPTH)/sun-java/include/_gen \
+	-I$(DEPTH)/sun-java/netscape/javascript/_gen \
+	-I$(DEPTH)/sun-java/netscape/applet/_gen \
+	-I$(DEPTH)/lib/libjava
+
+!if ("$(OS_RELEASE)" == "16" ) && !defined(MOZ_JAVA)
+JAVA_OBJS=
+!else
+JAVA_OBJS=.\$(OBJDIR)\mo_java.obj
+!endif
+
+#//------------------------------------------------------------------------
+#// 
+#// Define the files necessary to build the target (ie. OBJS)
+#//
+#//------------------------------------------------------------------------
+OBJS=                         \
+    .\$(OBJDIR)\mo_array.obj  \
+    .\$(OBJDIR)\mo_atom.obj   \
+    .\$(OBJDIR)\mo_bcode.obj  \
+    .\$(OBJDIR)\mo_bool.obj   \
+    .\$(OBJDIR)\mo_cntxt.obj  \
+    .\$(OBJDIR)\mo_date.obj   \
+    .\$(OBJDIR)\mo_emit.obj   \
+    .\$(OBJDIR)\mo_fun.obj    \
+    .\$(OBJDIR)\mo_math.obj   \
+    .\$(OBJDIR)\mo_num.obj    \
+    .\$(OBJDIR)\mo_obj.obj    \
+    .\$(OBJDIR)\mo_parse.obj  \
+    .\$(OBJDIR)\mo_scan.obj   \
+    .\$(OBJDIR)\mo_scope.obj  \
+    .\$(OBJDIR)\mo_str.obj    \
+    .\$(OBJDIR)\mocha.obj     \
+    .\$(OBJDIR)\mochaapi.obj  \
+    .\$(OBJDIR)\mochalib.obj  \
+    .\$(OBJDIR)\alloca.obj    \
+    $(JAVA_OBJS)              \
+    $(NULL)
+
+#//------------------------------------------------------------------------
+#//
+#// Define any Public Targets here (ie. PROGRAM, LIBRARY, DLL, ...)
+#// (these must be defined before the common makefiles are included)
+#//
+#//------------------------------------------------------------------------
+LIBRARY=.\$(OBJDIR)\$(LIBNAME).lib
+
+#//------------------------------------------------------------------------
+#//
+#// Include the common makefile rules
+#//
+#//------------------------------------------------------------------------
+include <$(DEPTH)/mocha/config/rules.mak>
+
+export:: $(LIBRARY)
+    $(MAKE_INSTALL) $(LIBRARY) $(DIST)\lib
+
+install:: export
+
+# hardwire dependencies on mocha.def
+mo_types.h mo_table.c: ..\include\mocha.def
+
+!if exist($(DEPFILE))
+!message +++ MAKE: Found local dependancies file!!
+!message 
+include <$(DEPFILE)>
+!endif

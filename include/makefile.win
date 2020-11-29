@@ -1,0 +1,51 @@
+#//------------------------------------------------------------------------
+#//
+#// Makefile to install NSPR/INCLUDE header files into the distribution
+#// directory.
+#//
+#//------------------------------------------------------------------------
+
+#//------------------------------------------------------------------------
+#//
+#// Specify the depth of the current directory relative to the
+#// root of NS
+#//
+#//------------------------------------------------------------------------
+DEPTH = ..\..
+
+#//------------------------------------------------------------------------
+#//
+#// Specify any "command" targets. (ie. DIRS, INSTALL_FILES, ...)
+#// (these must come before the common makefiles are included)
+#// 
+#// INSTALL_FILES - Files to be installed in the distribution area
+#//
+#//------------------------------------------------------------------------
+
+INSTALL_FILE_LIST=	\
+    mo_atom.h       \
+    mo_bcode.h      \
+    mo_cntxt.h      \
+    mo_emit.h       \
+    mo_java.h       \
+    mo_parse.h      \
+    mo_prvtd.h      \
+    mo_pubtd.h      \
+    mo_scan.h       \
+    mo_scope.h      \
+    mocha.def       \
+    mocha.h         \
+    mochaapi.h      \
+    $(NULL)
+INSTALL_DIR=$(DIST)\include\mocha
+
+#//------------------------------------------------------------------------
+#//
+#// Include the common makefile rules
+#//
+#//------------------------------------------------------------------------
+include <$(DEPTH)\mocha\config\rules.mak>
+
+export:: INSTALL_FILES
+
+install:: export

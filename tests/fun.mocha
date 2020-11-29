@@ -1,0 +1,19 @@
+function foo(x) {
+    var vfoo = foo;
+    var argv = vfoo.arguments;
+
+    print("foo == vfoo is " + (foo == vfoo));
+    print("foo == argv is " + (foo == argv));
+    print("foo.caller is " + foo.caller);
+    print("foo.arguments.length is " + foo.arguments.length);
+    print("formal x is " + foo.x);
+    for (var i = 0; i < argv.length; i++)
+	print("argument " + i + " is " + argv[i]);
+}
+
+function bar(x,y,z) {
+    foo(x,y,z)
+}
+
+foo(1, "two", 3);
+bar(1, "two", 3);

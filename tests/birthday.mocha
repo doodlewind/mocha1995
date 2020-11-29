@@ -1,0 +1,15 @@
+//tracing(1)
+
+function birthday(n) {
+    for (var p = 1, i = 1; i < n; i++) {
+	p *= (365 - i) / 365;
+    }
+    return 1 - p;
+}
+
+function birthdays() {
+    for (var i = 1; i < 365; i++)
+	print(i, birthday(i));
+}
+
+birthdays()

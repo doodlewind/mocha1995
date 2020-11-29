@@ -1,0 +1,26 @@
+function it_toString() {
+    var s, f, p;
+
+    s = "\n{\n";
+    f = true;
+    for (p in this) {
+	s += (f ? "  " : ",\n  ") + p + " = " + this[p];
+	f = false;
+    }
+    s += "}\n";
+    return s;
+}
+
+function it_printColor() {
+    print(this.color);
+}
+
+it.color = "red";
+it.height = 20;
+it.width = 10;
+it.funny = it_printColor;
+it.array = null;
+it.toString = it_toString;
+
+print(it)
+//print(it.toString())

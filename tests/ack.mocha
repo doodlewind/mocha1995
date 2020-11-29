@@ -1,0 +1,10 @@
+// Ackermann's function
+
+function ack(i, j) {
+    print("ack(" + i + ", " + j + ")")
+    if (i == 0) return j + 1
+    if (j == 0) return ack(i-1, 1)
+    return ack(i-1, ack(i, j-1))
+}
+
+print(ack(3,3))

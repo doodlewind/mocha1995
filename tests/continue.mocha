@@ -1,0 +1,12 @@
+function testContinue(n) {
+    for (var i = 0, j = 0; i < 20; i++) {
+	if (i >= n)
+	    continue;
+	j++;
+    }
+    return j;
+}
+
+print("expect 1:", testContinue(1))
+print("expect 11:", testContinue(11))
+print("expect 19:", testContinue(19))

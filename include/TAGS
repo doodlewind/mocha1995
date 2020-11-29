@@ -1,0 +1,213 @@
+
+mo_atom.h,470
+#define _mo_atom_h_2,20
+typedef uint8 MochaAtomFlags;MochaAtomFlags16,223
+#define ATOM_KEYWORD 18,254
+#define ATOM_NAME 19,331
+#define ATOM_NUMBER 20,399
+#define ATOM_STRING 21,471
+#define ATOM_HELD 22,542
+#define ATOM_INDEXED 23,621
+#define ATOM_TYPEMASK 24,695
+struct MochaAtom MochaAtom26,765
+#define atom_name(atom_name37,1418
+#define atom_next(atom_next38,1476
+struct MochaAtomMap MochaAtomMap40,1536
+struct MochaAtomState MochaAtomState45,1716
+
+mo_bcode.h,478
+#define _mo_bcode_h_2,21
+typedef enum MochaOp MochaOp18,250
+#define MOPDEF(MOPDEF19,273
+} MochaOp;MochaOp24,403
+typedef enum MochaOpFormat MochaOpFormat29,447
+} MochaOpFormat;MochaOpFormat36,848
+#define GET_JUMP_OFFSET(GET_JUMP_OFFSET38,866
+#define SET_JUMP_OFFSET(SET_JUMP_OFFSET39,934
+#define GET_CONST_ATOM(GET_CONST_ATOM41,1007
+#define SET_CONST_ATOM(SET_CONST_ATOM43,1113
+#define MOCHA_ATOM_INDEX_MAX 46,1207
+struct MochaCodeSpec MochaCodeSpec48,1250
+
+mo_cntxt.h,67
+#define _mo_cntxt_h_2,21
+struct MochaContext MochaContext24,555
+
+mo_emit.h,1025
+#define _mo_emit_h_2,20
+typedef struct LoopInfo LoopInfo;LoopInfo16,234
+struct LoopInfo LoopInfo18,269
+#define SET_LOOPINFO_TOP(SET_LOOPINFO_TOP27,746
+struct CodeGenerator CodeGenerator30,855
+#define CG_CODE(CG_CODE48,2017
+#define CG_OFFSET(CG_OFFSET49,2073
+#define CG_RESET(CG_RESET50,2130
+#define CG_RESET_NOTES(CG_RESET_NOTES56,2555
+typedef enum SourceNoteType SourceNoteType146,5252
+} SourceNoteType;SourceNoteType161,6349
+#define SN_TYPE_BITS 163,6368
+#define SN_DELTA_BITS 164,6402
+#define SN_TYPE_MASK 165,6437
+#define SN_DELTA_MASK 166,6513
+#define SN_TYPE(SN_TYPE168,6574
+#define SN_SET_TYPE(SN_SET_TYPE169,6631
+#define SN_DELTA(SN_DELTA172,6861
+#define SN_SET_DELTA(SN_SET_DELTA173,6917
+#define SN_OFFSET(SN_OFFSET176,7150
+#define SN_SET_OFFSET(SN_SET_OFFSET177,7190
+#define SN_DELTA_MAX 179,7252
+#define SN_LENGTH(SN_LENGTH182,7375
+#define SN_NEXT(SN_NEXT184,7527
+#define SN_MAKE_TERMINATOR(SN_MAKE_TERMINATOR187,7647
+#define SN_IS_TERMINATOR(SN_IS_TERMINATOR188,7691
+
+mo_java.h,175
+#define _mo_java_h_2,20
+typedef struct HObject HObject;HObject14,176
+typedef struct ClassClass ClassClass;ClassClass15,208
+typedef struct ExecEnv ExecEnv;ExecEnv16,246
+
+mo_parse.h,26
+#define _mo_parse_h_2,21
+
+mo_prvtd.h,1101
+#define _mo_prvtd_h_2,21
+typedef struct CodeGenerator    CodeGenerator;CodeGenerator23,840
+typedef uint16                  SourceNote;SourceNote24,887
+typedef struct MochaToken       MochaToken;MochaToken25,931
+typedef struct MochaTokenStream MochaTokenStream;MochaTokenStream26,975
+typedef int32                   MochaInt;MochaInt29,1064
+typedef uint32                  MochaUint;MochaUint30,1106
+#define MOCHA_INT_MAX 32,1150
+#define MOCHA_INT_MIN 33,1209
+typedef struct MochaAtomMap     MochaAtomMap;MochaAtomMap35,1262
+typedef uint32                  MochaAtomNumber;MochaAtomNumber36,1308
+typedef struct MochaAtomState   MochaAtomState;MochaAtomState37,1357
+typedef struct MochaCodeSpec    MochaCodeSpec;MochaCodeSpec38,1405
+typedef struct MochaObjectStack MochaObjectStack;MochaObjectStack39,1452
+typedef struct MochaPrinter     MochaPrinter;MochaPrinter40,1502
+typedef struct MochaProperty    MochaProperty;MochaProperty41,1548
+typedef struct MochaStackFrame  MochaStackFrame;MochaStackFrame42,1595
+typedef struct MochaStack       MochaStack;MochaStack43,1644
+
+mo_pubtd.h,1578
+#define _mo_pubtd_h_2,21
+typedef struct MochaAtom         MochaAtom;MochaAtom12,198
+typedef struct MochaClass        MochaClass;MochaClass13,242
+typedef uint8                    MochaCode;MochaCode14,287
+typedef struct MochaContext      MochaContext;MochaContext15,331
+typedef struct MochaDatum        MochaDatum;MochaDatum16,378
+typedef struct MochaErrorReport  MochaErrorReport;MochaErrorReport17,423
+typedef double                   MochaFloat;MochaFloat18,474
+typedef struct MochaFunction     MochaFunction;MochaFunction19,519
+typedef struct MochaFunctionSpec MochaFunctionSpec;MochaFunctionSpec20,567
+typedef struct MochaPropertySpec MochaPropertySpec;MochaPropertySpec21,619
+typedef struct MochaObject       MochaObject;MochaObject22,671
+typedef int32                    MochaRefCount;MochaRefCount23,717
+typedef struct MochaScope        MochaScope;MochaScope24,765
+typedef struct MochaScript       MochaScript;MochaScript25,810
+typedef int32                    MochaSlot;MochaSlot26,856
+typedef struct MochaSymbol       MochaSymbol;MochaSymbol27,900
+typedef struct MochaTaintInfo    MochaTaintInfo;MochaTaintInfo28,946
+#define MOCHA_FINALIZING	31,1061
+typedef PRBool MochaBoolean;MochaBoolean34,1152
+#define MOCHA_FALSE 35,1181
+#define MOCHA_TRUE 36,1210
+(*MochaPropertyOp)MochaPropertyOp40,1327
+(*MochaNativeCall)MochaNativeCall44,1442
+(*MochaBranchCallback)MochaBranchCallback48,1576
+(*MochaErrorReporter)MochaErrorReporter51,1653
+(*MochaTaintCounter)MochaTaintCounter55,1763
+(*MochaTaintMixer)MochaTaintMixer58,1833
+
+mo_scan.h,739
+#define _mo_scan_h_2,20
+typedef enum MochaTokenType MochaTokenType19,283
+} MochaTokenType;MochaTokenType65,3133
+#define IS_PRIMARY_TOKEN(IS_PRIMARY_TOKEN67,3152
+struct MochaToken MochaToken69,3227
+typedef struct MochaTokenBuf MochaTokenBuf79,3636
+} MochaTokenBuf;MochaTokenBuf83,3897
+#define MOCHA_LINE_MAX 85,3915
+struct MochaTokenStream MochaTokenStream88,4073
+#define TSF_EOF 103,4802
+#define TSF_NEWLINES 104,4864
+#define TSF_FUNCTION 105,4928
+#define TSF_RETURN_EXPR 106,5004
+#define TSF_RETURN_VOID 107,5078
+#define TSF_INTERACTIVE 108,5147
+#define TSF_COMMAND 109,5218
+#define CLEAR_PUSHBACK(CLEAR_PUSHBACK111,5286
+#define SCAN_NEWLINES(SCAN_NEWLINES112,5346
+#define HIDE_NEWLINES(HIDE_NEWLINES113,5404
+
+mo_scope.h,688
+#define _mo_scope_h_2,21
+typedef enum MochaSymbolType MochaSymbolType22,490
+} MochaSymbolType;MochaSymbolType27,822
+struct MochaScope MochaScope32,890
+struct MochaProperty MochaProperty46,1574
+#define PROP_INIT_LINKS(PROP_INIT_LINKS63,2463
+#define PROP_APPEND(PROP_APPEND69,2803
+#define PROP_UNLINK(PROP_UNLINK77,3303
+struct MochaObjectStack MochaObjectStack90,4018
+struct MochaSymbol MochaSymbol98,4249
+#define sym_atom(sym_atom106,4645
+#define sym_datum(sym_datum107,4705
+#define sym_property(sym_property108,4768
+typedef enum MochaLookupFlag MochaLookupFlag148,6104
+typedef enum MochaLookupFlag { MLF_GET, MLF_SET } MochaLookupFlag;MochaLookupFlag148,6104
+
+mocha.def,0
+
+mocha.h,242
+#define _mocha_h_2,18
+struct MochaScript MochaScript20,323
+struct MochaFunction MochaFunction34,961
+struct MochaStackFrame MochaStackFrame48,1613
+struct MochaStack MochaStack63,2316
+#define MOCHA_INIT_STACK(MOCHA_INIT_STACK70,2626
+
+mochaapi.h,1752
+#define _mochaapi_h_2,21
+typedef enum MochaTag MochaTag23,593
+} MochaTag;MochaTag34,1269
+typedef struct MochaPair MochaPair36,1282
+} MochaPair;MochaPair39,1461
+struct MochaDatum MochaDatum50,1919
+#define MDF_BACKEDGE 66,2639
+#define MDF_ENUMERATE 67,2718
+#define MDF_READONLY 68,2799
+#define MDF_VISITED 69,2876
+#define MDF_TAINTED 70,2957
+#define MDF_ALLFLAGS 71,3036
+#define MDF_TRACEBITS 74,3137
+#define MDF_TRACEBITS 76,3224
+#define MOCHA_ASSERT_VALID_DATUM_FLAGS(MOCHA_ASSERT_VALID_DATUM_FLAGS79,3258
+#define MOCHA_TAINT_IDENTITY 83,3410
+#define MOCHA_TAINT_SHIST 84,3444
+#define MOCHA_TAINT_JAVA 85,3493
+#define MOCHA_TAINT_MAX 86,3542
+#define MOCHA_MIX_TAINT(MOCHA_MIX_TAINT88,3592
+#define MOCHA_INIT_DATUM(MOCHA_INIT_DATUM113,5037
+#define MOCHA_INIT_FULL_DATUM(MOCHA_INIT_FULL_DATUM119,5377
+#define MOCHA_DATUM_IS_NULL(MOCHA_DATUM_IS_NULL126,5797
+#define _word0(_word0132,5989
+#define _word1(_word1133,6029
+#define _word0(_word0135,6075
+#define _word1(_word1136,6115
+#define _expmask 138,6162
+#define MOCHA_FLOAT_IS_NaN(MOCHA_FLOAT_IS_NaN140,6192
+struct MochaObject MochaObject274,10303
+struct MochaClass MochaClass317,12715
+#define OBJ_GET_PROPERTY(OBJ_GET_PROPERTY330,13302
+#define OBJ_SET_PROPERTY(OBJ_SET_PROPERTY332,13406
+#define OBJ_LIST_PROPERTIES(OBJ_LIST_PROPERTIES334,13510
+#define OBJ_RESOLVE_NAME(OBJ_RESOLVE_NAME336,13600
+#define OBJ_CONVERT(OBJ_CONVERT338,13696
+#define OBJ_FINALIZE(OBJ_FINALIZE340,13789
+struct MochaPropertySpec MochaPropertySpec397,15444
+struct MochaFunctionSpec MochaFunctionSpec421,16480
+struct MochaErrorReport MochaErrorReport778,28783
+struct MochaTaintInfo MochaTaintInfo794,29298
+typedef int (*MochaCharFilter)MochaCharFilter814,29943
