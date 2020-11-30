@@ -1,6 +1,9 @@
 #ifndef prtypes_h___
 #define prtypes_h___
 
+#include <stdint.h>
+#include <stdbool.h>
+
 /* jwz: to get uint on linux */
 #ifdef __linux
 #include <fcntl.h>
@@ -114,16 +117,16 @@ typedef unsigned long prbitmap_t;
 typedef unsigned int uint;
 #endif
 
-typedef unsigned char uint8;
-typedef signed char int8;
-typedef unsigned short uint16;
-typedef signed short int16;
+typedef uint8_t uint8;
+typedef int8_t int8;
+typedef uint16_t uint16;
+typedef int16_t int16;
 #ifdef IS_64 /* XXX ok for alpha, but not right on all 64-bit architectures */
-typedef unsigned int uint32;
-typedef signed int int32;
+typedef uint32_t uint32;
+typedef int32_t int32;
 #else
-typedef unsigned long uint32;
-typedef signed long int32;
+typedef uint32_t uint32;
+typedef int32_t int32;
 #endif
 
 /*

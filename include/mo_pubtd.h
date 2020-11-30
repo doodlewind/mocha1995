@@ -27,6 +27,8 @@ typedef int32                    MochaSlot;
 typedef struct MochaSymbol       MochaSymbol;
 typedef struct MochaTaintInfo    MochaTaintInfo;
 
+#define MOCHAFILE
+
 /* Special reference count value for objects being finalized. */
 #define MOCHA_FINALIZING	((MochaRefCount)0xdeadbeef)
 

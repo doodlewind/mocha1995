@@ -6,9 +6,9 @@
 ** Brendan Eich, 6/15/95
 */
 #include <stddef.h>
-#ifdef MOCHAFILE
+// #ifdef MOCHAFILE
 #include <stdio.h>
-#endif
+// #endif
 #include "prmacros.h"
 #include "mo_prvtd.h"
 #include "mo_bcode.h"

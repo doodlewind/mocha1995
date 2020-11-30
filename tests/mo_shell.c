@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include "prarena.h"
 #include "prlog.h"
 #include "prprf.h"

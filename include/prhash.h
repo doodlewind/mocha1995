@@ -17,7 +17,7 @@ NSPR_BEGIN_EXTERN_C
 
 typedef struct PRHashEntryStr PRHashEntry;
 typedef struct PRHashTableStr PRHashTable;
-typedef uint32_t PRHashNumber;
+typedef uint32 PRHashNumber;
 #define PR_HASH_BITS 32
 typedef PRHashNumber (*PRHashFunction)(const void *key);
 typedef int (*PRHashComparator)(const void *v1, const void *v2);
@@ -68,7 +68,7 @@ struct PRHashTableStr {
 ** If allocOps is null, use default allocator ops built on top of malloc().
 */
 extern PR_PUBLIC_API(PRHashTable *)
-PR_NewHashTable(uint32_t n, PRHashFunction keyHash,
+PR_NewHashTable(uint32 n, PRHashFunction keyHash,
                 PRHashComparator keyCompare, PRHashComparator valueCompare,
                 PRHashAllocOps *allocOps, void *allocPool);
 
@@ -90,7 +90,7 @@ PR_HashTableRawRemove(PRHashTable *ht, PRHashEntry **hep, PRHashEntry *he);
 extern PR_PUBLIC_API(PRHashEntry *)
 PR_HashTableAdd(PRHashTable *ht, const void *key, void *value);
 
-extern PR_PUBLIC_API(bool)
+extern PR_PUBLIC_API(PRBool)
 PR_HashTableRemove(PRHashTable *ht, const void *key);
 
 extern PR_PUBLIC_API(int)
