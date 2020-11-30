@@ -126,7 +126,6 @@ extern MochaTaintMixer mocha_MixTaint;
 #define MOCHA_DATUM_IS_NULL(D)  ((D).tag == MOCHA_OBJECT && (D).u.obj == 0)
 
 /* XXX should use macros from prdtoa.c, exported via a header... */
-#include "prcpucfg.h"
 
 #ifdef IS_LITTLE_ENDIAN
 #define _word0(x) (((uint32 *)&(x))[1])

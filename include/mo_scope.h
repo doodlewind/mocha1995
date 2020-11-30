@@ -9,6 +9,7 @@
 #include "prhash.h"
 #include "prmacros.h"
 #include "mo_pubtd.h"
+#include "mo_prvtd.h"
 #include "mochaapi.h"
 
 NSPR_BEGIN_EXTERN_C
