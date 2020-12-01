@@ -84,7 +84,9 @@ function compile_web() {
     $AR -rcs out/libmocha.a out/*.o
     $CC -Iinclude -Lout -lmocha tests/mo_shell.c \
         --shell-file src/shell.html \
+        -s NO_EXIT_RUNTIME=0 \
         -s WASM=$1 \
+        -O2 \
         -o $2
     echo "mocha shell compiled!"
 }
