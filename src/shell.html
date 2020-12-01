@@ -5,73 +5,24 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Mocha Shell</title>
     <style>
-      body { max-width: 800px; margin: auto; padding: 10px; }
+      body { max-width: 800px; display: flex; justify-content: center; align-items: center; }
+      textarea { font-family: monospace; width: calc(100vw - 20px); height: calc(100vh - 20px); resize: none; }
       .emscripten { padding-right: 0; margin-left: auto; margin-right: auto; display: block; }
-      textarea.emscripten {
-        font-family: monospace;
-        width: 100%;
-        height: 200px;
-        resize: vertical;
-        margin-bottom: 8px;
-      }
-      div.emscripten_border { border: 1px solid black; }
-      #loading {
-        position: fixed;
-        top: 10%;
-        left: 50%;
-        transform: translateX(-50%);
-        background: white;
-        box-shadow: 0 0 10px #ddd;
-        padding: 15px;
-      }
+      #loading { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; box-shadow: 0 0 10px #ddd; padding: 15px; }
       #loading p {  text-align: center; font-weight: bold; }
       #status { text-align: center; }
-
       .spinner {
-        height: 50px;
-        width: 50px;
-        margin: 0px auto;
-        -webkit-animation: rotation .8s linear infinite;
-        -moz-animation: rotation .8s linear infinite;
-        -o-animation: rotation .8s linear infinite;
-        animation: rotation 0.8s linear infinite;
-        border-left: 10px solid rgb(0,150,240);
-        border-right: 10px solid rgb(0,150,240);
-        border-bottom: 10px solid rgb(0,150,240);
-        border-top: 10px solid rgb(100,0,200);
-        border-radius: 100%;
-        background-color: rgb(200,100,250);
+        height: 50px; width: 50px; margin: 0px auto; animation: rotation 0.8s linear infinite; border-radius: 100%; background-color: rgb(200,100,250);
+        border-left: 10px solid rgb(0,150,240); border-right: 10px solid rgb(0,150,240);
+        border-bottom: 10px solid rgb(0,150,240); border-top: 10px solid rgb(100,0,200);
       }
-      @-webkit-keyframes rotation {
-        from {-webkit-transform: rotate(0deg);}
-        to {-webkit-transform: rotate(360deg);}
-      }
-      @-moz-keyframes rotation {
-        from {-moz-transform: rotate(0deg);}
-        to {-moz-transform: rotate(360deg);}
-      }
-      @-o-keyframes rotation {
-        from {-o-transform: rotate(0deg);}
-        to {-o-transform: rotate(360deg);}
-      }
-      @keyframes rotation {
-        from {transform: rotate(0deg);}
-        to {transform: rotate(360deg);}
-      }
-
+      @keyframes rotation { from {transform: rotate(0deg);} to {transform: rotate(360deg);} }
     </style>
   </head>
   <body>
-    <textarea class="emscripten" id="input"></textarea>
-    <div class="emscripten">
-      <input type="button" value="Run" onclick="runScript">
-    </div>
-    <hr/>
-    <div id="output"></div>
+    <textarea class="emscripten" id="output"></textarea>
     <div id="loading">
-      <figure id="spinner">
-        <div class="spinner"></div>
-      </figure>
+      <figure id="spinner"><div class="spinner"></div></figure>
       <p>emscripten</p>
       <div class="emscripten" id="status">...Downloading...</div>
     </div>
@@ -79,37 +30,58 @@
       const statusElement = document.getElementById('status');
       const spinnerElement = document.getElementById('spinner');
       const loadingElement = document.getElementById('loading');
-      
+
+      let input = `
+function hello() {
+  print('hello mocha!')
+}
+hello()`;
+      let i = 0;
+
       Module = {
-        preRun: [],
-        postRun: [],
-        print: (function() {
-          const element = document.getElementById('output');
-          if (element) element.value = ''; // clear browser cache
-          return function(text) {
-            if (arguments.length > 1) text = [...arguments].join(' ');
-            text = text.replace(/&/g, "&amp;");
-            text = text.replace(/</g, "&lt;");
-            text = text.replace(/>/g, "&gt;");
-            text = text.replace('\n', '<br>', 'g');
-            console.log(text);
-            if (element) {
-              element.innerText += text + "\n";
-              // element.scrollTop = element.scrollHeight; // focus on bottom
+        preRun: function() {
+          function stdin() {
+            if (i < input.length) {
+              const code = input.charCodeAt(i);
+              ++i;
+              return code;
+            } else {
+              return null;
             }
-          };
-        })(),
-        printErr: function(text) {
-          if (arguments.length > 1) text = Array.prototype.slice.call(arguments).join(' ');
-          console.error(text);
+          }
+
+          const element = document.getElementById('output');
+          let stdoutBuffer = '';
+          function stdout(code) {
+            if (code === "\n".charCodeAt(0) && stdoutBuffer !== "") {
+              console.log(stdoutBuffer);
+              element.value = stdoutBuffer + "\n";
+              element.scrollTop = element.scrollHeight; // focus on bottom
+              stdoutBufer = '';
+            } else {
+              stdoutBuffer += String.fromCharCode(code);
+            }
+          }
+
+          let stderrBuffer = '';
+          function stderr(code) {
+            if (code === "\n".charCodeAt(0) && stderrBuffer !== "") {
+              console.error(stderrBuffer);
+              stderrBuffer = '';
+            } else {
+              stderrBuffer += String.fromCharCode(code);
+            }
+          }
+
+          FS.init(stdin, stdout, stderr);
         },
         setStatus: function(text) {
-          console.info('Status:', text);
+          // console.log('Status:', text);
           if (!Module.setStatus.last) Module.setStatus.last = { time: Date.now(), text: '' };
           if (text === Module.setStatus.last.text) return;
 
           const now = Date.now();
-          const complete = text === 'All downloads complete' || text === '';
+          const complete = text === 'All downloads complete' || text === 'Running...' || text === '';
           if (complete && now - Module.setStatus.last.time < 30) return; // if this is a progress update, skip it if too soon
           Module.setStatus.last.time = now;
           Module.setStatus.last.text = text;
@@ -124,10 +96,6 @@
           Module.setStatus(left ? '...Preparing...' : 'All downloads complete');
         }
       };
-      
-      function runScript() {
-        // TODO
-      }
 
       window.onerror = function() {
         Module.setStatus('Exception thrown, see JavaScript console');
