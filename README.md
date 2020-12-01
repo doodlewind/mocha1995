@@ -8,8 +8,14 @@ In late 1996, Eich "stayed home for two weeks to rewrite Mocha as the codebase t
 
 Here is the source code of production version of Mocha, which ships as JavaScript 1.1. This version is released in August 1996 with Netscape 3.0. The release of JavaScript 1.1 marks the completion of the initial definition and development of JavaScript.
 
+## Live Playground
+Besides native binary, the ported Mocha engine can also be compiled to WASM and JavaScript:
+
+* [WASM Version](https://doodlewind.github.io/mocha1995/index.html)
+* [JavaScript Version](https://doodlewind.github.io/mocha1995/index.html#js)
+
 ## Build
-The ported Mocha engine can be compiled to WASM, JS and native binary. For WASM and JS build, please make sure [Emscripten](https://emscripten.org/docs/getting_started/downloads.html) is installed and activated (`emcc` command is available):
+For WASM and JS build, please make sure [Emscripten](https://emscripten.org/docs/getting_started/downloads.html) is installed and activated (`emcc` command is available):
 
 ``` sh
 $ source build.sh

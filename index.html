@@ -25,6 +25,7 @@ hello()</textarea>
   </div>
 </body>
 <script>
+  const mode = location.hash.includes('js') ? 'js' : 'wasm';
   const input = document.getElementById('input');
   localStorage.setItem('mochaScript', ''); // reset
 
@@ -37,7 +38,7 @@ hello()</textarea>
     const newIframe = document.createElement('iframe');
     newIframe.frameBorder = "0";
     newIframe.scrolling = "no";
-    newIframe.setAttribute('src', './out/mocha_shell_wasm.html');
+    newIframe.setAttribute('src', `./out/mocha_shell_${mode}.html`);
     document.body.appendChild(newIframe);
   }
 </script>
