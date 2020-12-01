@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Mocha 1995</title>
+  <style>
+    body { display: flex; flex-direction: column; margin: 0; height: 100%; }
+    #panel { position: relative; width: calc(100vw - 20px); height: calc(100vh - 222px); padding: 10px; cursor: default; border-bottom: 2px solid #ccc; }
+    textarea {
+      padding: 10px; width: calc(100vw - 44px); height: calc(100vh - 246px);
+      border: 2px solid lightblue; border-radius: 4px; font-family: monospace; resize: none;
+    }
+    #btn-run { position: absolute; top: 12px; right: 12px; width: 50px; height: 30px; border-radius: 2px; outline: none; border: none; cursor: pointer; }
+    iframe { width: 100vw; height: 200px; overflow: hidden; }
+  </style>
+</head>
+
+<body>
+  <div id="panel">
+    <textarea id="input" spellcheck="false">function hello() {
+  print('hello mocha!')
+}
+hello()</textarea>
+    <button id="btn-run" onclick="run()">Run</div>
+  </div>
+</body>
+<script>
+  const input = document.getElementById('input');
+  localStorage.setItem('mochaScript', ''); // reset
+
+  function run() {
+    localStorage.setItem('mochaScript', input.value);
+
+    let oldIframe = document.querySelector('iframe');
+    if (oldIframe) document.body.removeChild(oldIframe);
+
+    const newIframe = document.createElement('iframe');
+    newIframe.frameBorder = "0";
+    newIframe.scrolling = "no";
+    newIframe.setAttribute('src', './out/mocha_shell_wasm.html');
+    document.body.appendChild(newIframe);
+  }
+</script>
+
+</html>
