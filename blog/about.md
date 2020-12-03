@@ -190,14 +190,14 @@ I did not rewrite the Makefile after I had the Mocha engine available, because I
 ``` sh
 $ source build.sh
 
+# build native
+$ compile_native
+
 # build WASM
 $ compile_wasm
 
 # build js
 $ compile_js
-
-# build native
-$ compile_native
 ```
 
 The Emscripten compiler itself, however, is highly aggressive by default, outputting an HTML that "executes WASM content as soon as the page is opened". For the sake of simplicity, the WASM engine page is embedded directly into an iframe here. Each time the "Run" button is clicked on the page, the content of the input box is inserted into localStorage, and then the corresponding WASM iframe page is reloaded, in which the JS scripts in localStorage are read synchronously as standard input for the Emscripten-simulated stdin, and finally Mocha is started and interprets scripts automatically.

@@ -22,14 +22,14 @@ For WASM and JS build, please make sure [Emscripten](https://emscripten.org/docs
 ``` sh
 $ source build.sh
 
+# build native
+$ compile_native
+
 # build WASM
 $ compile_wasm
 
 # build js
 $ compile_js
-
-# build native
-$ compile_native
 ```
 
 The Web build generates `out/mocha_shell_js.html` and `out/mocha_shell_wasm.html` as entries. For the native build, there is a binary runtime available:
