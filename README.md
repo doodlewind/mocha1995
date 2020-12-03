@@ -1,5 +1,5 @@
 # Mocha 1995
-The original Mocha JavaScript engine, ported from [Netscape 3.0.2 Source Tree](https://archive.org/details/netscape-communicator-3-0-2-source).
+The original Mocha JavaScript engine, ported from Netscape 3.0.2 browser.
 
 ![mocha-wasm](./blog/mocha-wasm.png)
 
@@ -40,8 +40,9 @@ $ out/mo_shell tests/ack.mocha
 
 ## Resources
 * [Compiling World's First JavaScript Engine Back to JavaScript](./blog/about.md)
+* [Netscape 3.0.2 Source Tree](https://archive.org/details/netscape-communicator-3-0-2-source)
 * [JavaScript: The First 20 Years](https://doi.org/10.1145/3386327)
 * [JavaScript 20 年](https://cn.history.js.org/)
 
 ## License
-⚠️ License status is unknown yet. Don't use in commerial projects!
+License status of original Netscape source code is unknown yet. This port is intended for historic preservation and educational usage. Don't use in commerial projects!
