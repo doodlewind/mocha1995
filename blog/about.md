@@ -3,7 +3,7 @@ In 1995, when I was just one year old, a man across the ocean named Brendan Eich
 
 The story of the rapid creation of JavaScript is well known among the programmer communities. But perhaps not many people today could remember (or even experience) what the "original JavaScript" was like, let alone reading the code of the JS engine back then.
 
-In 2020, however, we have an opportunity to learn more about this history. At the HOPL-IV, a conference about the history of programming languages, [JavaScript The First 20 Years](https://doi.org/10.1145/3386327), co-authored by Brendan Eich and ES6 lead author Allen Wirfs-Brock, provides a detailed history of the birth and evolution of JavaScript. As the translator of the Chinese version of this book, I proofread each of the more than 600 reference links in the original edition, and one of them pointed to the source code of the earliest JS engine. This inspired my curiosity - could the earliest JS engine code still be compiled and run today? If possible, could I take it a step further and compile it back into JavaScript, bringing it back to life on the Web? So I made this attempt.
+In 2020, however, we have an opportunity to learn more about this history. At the HOPL-IV, a conference about the history of programming languages, [JavaScript The First 20 Years](https://doi.org/10.1145/3386327), co-authored by Brendan Eich and ES6 lead author Allen Wirfs-Brock, provides a detailed history of the birth and evolution of JavaScript. As the translator of the Chinese version of this book, I proofread each of the more than 600 reference links in the original edition, and one of them pointed to the source code of the earliest JS engine. This inspired my curiosity - could the earliest JS engine code still be compiled and run today? If possible, could I take it a step further and compile it back into JavaScript, bringing it back to life on the web? So I made this attempt.
 
 The earliest JS engine was called Mocha (the codename for Netscape's internal web scripting language project), its first prototype was written by Eich in May 1995. Throughout 1995 and most of 1996, Eich was the only full-time developer working on the JavaScript engine. Mocha's codebase was still mainly comprised of code from this prototype, until the release of Netscape 3.0 in August 1996. The JS version released with Netscape 3.0 was called JavaScript 1.1, which marked the completion of the initial development phase of JavaScript. After that, Eich spent another two weeks rewriting Mocha to get a more powerful engine, which is today's Firefox SpiderMonkey.
 
@@ -97,6 +97,16 @@ if (k < 0)
 goto syntax;
 ```
 
+And there are pretty much comments reminding me about its history, like the one in `mocha.c`:
+
+``` c
+/*
+** Mocha virtual machine.
+**
+** Brendan Eich, 6/20/95
+*/
+```
+
 I also found some code that exemplifies the chaotic compatibility issues of 1995. They give me a better understanding of why people at the time were expecting the "write once, run everywhere" Java:
 
 ``` c
@@ -144,7 +154,7 @@ I also found some code that exemplifies the chaotic compatibility issues of 1995
 #endif
 ```
 
-Fortunately, all these C code compiles without any problems. No superfluous changes have been made here to preserve the historical legacy. And once we have all the object files, just use the following lines of bash script to link against the `libmocha` static library, creating Mocha's executable!
+Fortunately, all these C code compiles without any problem. No superfluous changes have been made here to preserve the historical legacy. And once we have all the object files, just use the following lines of bash script to link against the `libmocha` static library, creating Mocha's executable!
 
 ``` sh
 function compile_native() {
@@ -206,7 +216,7 @@ The process is simple enough that I guess any average front end developer can ea
 
 ![mocha-wasm](./mocha-wasm.png)
 
-And that's it! We have "reinstalled" the world's first JS engine inside a Web browser!
+And that's it! We have "reinstalled" the world's first JS engine inside a web browser!
 
 From finding the source code to getting the WASM version online, it only took me less than three days of spare time. So I personally believe that the Mocha engine was pretty well thought out in terms of portability, and had good engineering quality. However, some of its basic design, such as reference counting, had inherent performance bottlenecks that required it to be rewritten, which is a different story.
 
