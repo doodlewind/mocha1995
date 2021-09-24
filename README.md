@@ -38,6 +38,15 @@ The Web build generates `out/mocha_shell_js.html` and `out/mocha_shell_wasm.html
 $ out/mo_shell tests/ack.mocha
 ```
 
+## CMake
+I added CMakeLists.txt so that this project can use CMake. Being able to use CMake, you can use CLion single-step debugging on Linux.
+
+```
+cd out
+cmake -H"../" -B"./" -DCMAKE_BUILD_TYPE=MinSizeRel
+make
+```
+
 ## Resources
 * [Compiling World's First JavaScript Engine Back to JavaScript](./blog/about.md)
 * [Netscape 3.0.2 Source Tree](https://archive.org/details/netscape-communicator-3-0-2-source)
