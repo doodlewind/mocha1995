@@ -42,16 +42,16 @@ $ out/mo_shell tests/ack.mocha
 The `CMakeLists.txt` is added for single-step debugging on Linux with CLion.
 
 ``` sh
-cd out
-cmake -H"../" -B"./" -DCMAKE_BUILD_TYPE=MinSizeRel
-make
+$ cd out
+$ cmake -H"../" -B"./" -DCMAKE_BUILD_TYPE=MinSizeRel
+$ make
 ```
 
 ## Resources
 * [Compiling World's First JavaScript Engine Back to JavaScript](./blog/about.md)
 * [Netscape 3.0.2 Source Tree](https://archive.org/details/netscape-communicator-3-0-2-source)
 * [JavaScript: The First 20 Years](https://doi.org/10.1145/3386327)
-* [JavaScript 二十 年](https://cn.history.js.org/)
+* [JavaScript 二十年](https://cn.history.js.org/)
 
 ## License
 License status of original Netscape source code is unknown yet. This port is intended for historic preservation and educational usage. Don't use in commerial projects!
