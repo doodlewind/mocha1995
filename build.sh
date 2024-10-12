@@ -71,8 +71,7 @@ function compile_native() {
     export AR=ar
     compile_objs
     echo "linking..."
-    $AR -rcs out/libmocha.a out/*.o
-    $CC -Iinclude -Lout -lmocha tests/mo_shell.c -o out/mo_shell
+    $CC -Iinclude -Lout -lm tests/mo_shell.c out/*.o -o out/mo_shell
     echo "mocha shell compiled!"
 }
 
