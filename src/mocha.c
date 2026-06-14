@@ -17,6 +17,7 @@
 #include "mocha.h"
 #include "mochaapi.h"
 #include "mochalib.h"
+#include "mo_introspect.h"
 
 #ifdef DEBUG
 # include "mo_emit.h"	/* for mocha_PCtoLineNumber() */
@@ -844,6 +845,8 @@ mocha_Interpret(MochaContext *mc, MochaObject *slink, MochaScript *script,
 	op = *pc;
 	cs = &mocha_CodeSpec[op];
 	len = cs->length;
+	if (mocha_TraceHook)
+	    (*mocha_TraceHook)(mc, script, pc, sp);
 #ifdef DEBUG
 	if (mc->tracefp) {
 	    int nuses, n;
