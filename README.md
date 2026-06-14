@@ -16,6 +16,19 @@ Besides native binary, the ported Mocha engine can also be compiled to WASM and 
 * [WASM Version](https://mocha1995.js.org)
 * [JavaScript Version](https://mocha1995.js.org#js)
 
+## Modern Playground & Engine Debugger
+A modern web playground lives in [`web/`](./web) — a Vite + React + TypeScript + Tailwind app that runs the engine (compiled to WebAssembly) and **visualizes how it works**: the scanner's token stream, the compiled bytecode, and an interactive step-debugger over the real execution trace (value stack, call stack and per-instruction state), plus charts for the compiler pipeline, execution timeline and opcode profile.
+
+```sh
+# Build the engine to WASM (needs Emscripten on PATH, e.g. `source emsdk_env.sh`)
+$ bash build_wasm.sh
+
+# Run the playground
+$ cd web && npm install && npm run dev
+```
+
+The instrumentation that powers this is intentionally minimal: a single `mocha_TraceHook` call added to the interpreter loop (`src/mocha.c`) plus a self-contained embedder, `src/mo_web.c`, that emits the engine's internals as JSON. See [`web/README.md`](./web/README.md) for details.
+
 ## Build
 For WASM and JS build, please make sure [Emscripten](https://emscripten.org/docs/getting_started/downloads.html) is installed and activated (`emcc` command is available):
 

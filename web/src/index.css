@@ -1,0 +1,87 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-mocha-50: #faf6f0;
+  --color-mocha-100: #f0e6d8;
+  --color-mocha-200: #e0cab0;
+  --color-mocha-300: #c9a47b;
+  --color-mocha-400: #b3814f;
+  --color-mocha-500: #8a5a2b;
+  --color-mocha-600: #6f4520;
+  --color-mocha-700: #523219;
+  --color-mocha-800: #3a2412;
+  --color-mocha-900: #24160b;
+
+  --color-ink-900: #0e1116;
+  --color-ink-800: #151a21;
+  --color-ink-700: #1c232c;
+  --color-ink-600: #283038;
+  --color-ink-500: #3a444f;
+  --color-ink-400: #5b6672;
+  --color-ink-300: #8a97a4;
+  --color-ink-200: #b9c2cc;
+  --color-ink-100: #e3e8ed;
+
+  --color-accent: #e0954a;
+  --color-accent-bright: #f4b063;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--color-ink-900);
+  color: var(--color-ink-100);
+  font-family:
+    ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-mono,
+.cm-editor {
+  font-family:
+    'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+/* Thin custom scrollbars for the panels. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-ink-500) transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--color-ink-500);
+  border-radius: 4px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+@keyframes pop-in {
+  from {
+    transform: translateY(6px) scale(0.96);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+.animate-pop-in {
+  animation: pop-in 0.18s ease-out;
+}
+
+/* Highlight applied to the current source line during debugging. */
+.cm-current-line-debug {
+  background: rgba(224, 149, 74, 0.16) !important;
+}
+.cm-error-line {
+  background: rgba(239, 68, 68, 0.18) !important;
+}

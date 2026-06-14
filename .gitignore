@@ -1,3 +1,14 @@
 .DS_Store
 .vscode
 out
+
+# Web playground
+web/node_modules
+web/dist
+web/.vite
+web/*.tsbuildinfo
+web/**/*.tsbuildinfo
+
+# Built engine artifacts (regenerate with build_wasm.sh)
+web/public/engine/mocha.mjs
+web/public/engine/mocha.wasm
